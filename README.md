@@ -1,5 +1,7 @@
 # PROXX
 
+Golang Proxx game demo example.
+
 ### Run game
 Go to cmd folder and execute `go run main.go`
 
@@ -14,6 +16,9 @@ In input field pass white space separated row and column indexes, e.g. `2 1` for
  4  X  X  X  X  X 
  5  X  X  X  X  X 
 ```
+
+### GUI mode
+Go to cmd folder and execute `go run main.go --gui`
 
 ### Run tests
 From project root folder run `go test . -v` 

@@ -61,7 +61,7 @@ func (a *Application) askBoardConfig() (BoardConfig, error) {
 
 func (a *Application) startGame(bc BoardConfig) error {
 	b := NewBoard(bc)
-	br := NewBoardRenderer()
+	br := NewConsoleBoardRenderer()
 	isComplete := false
 
 	printBoard(br, b)
@@ -87,7 +87,7 @@ func (a *Application) startGame(bc BoardConfig) error {
 	return nil
 }
 
-func printBoard(br *BoardRenderer, b *Board) {
+func printBoard(br *ConsoleBoardRenderer, b *Board) {
 	fmt.Println()
 	fmt.Println(br.Render(b))
 }

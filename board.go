@@ -10,8 +10,9 @@ const (
 )
 
 type Board struct {
-	config BoardConfig
-	cells  map[int]map[int]ICell
+	config     BoardConfig
+	cells      map[int]map[int]ICell
+	isGameOver bool
 }
 
 func NewBoard(conf BoardConfig) *Board {

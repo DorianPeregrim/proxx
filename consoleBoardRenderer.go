@@ -6,14 +6,14 @@ import (
 	"github.com/fatih/color"
 )
 
-type BoardRenderer struct {
+type ConsoleBoardRenderer struct {
 }
 
-func NewBoardRenderer() *BoardRenderer {
-	return &BoardRenderer{}
+func NewConsoleBoardRenderer() *ConsoleBoardRenderer {
+	return &ConsoleBoardRenderer{}
 }
 
-func (br *BoardRenderer) Render(b *Board) string {
+func (br *ConsoleBoardRenderer) Render(b *Board) string {
 	var out string
 	b.iterateCells(func(i, j int, c ICell) {
 		if i == 0 && j == 0 {
