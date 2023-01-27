@@ -4,6 +4,12 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
+const (
+	rowsNum       = 10
+	colsNum       = 10
+	blackHolesNum = 10
+)
+
 type Game struct {
 	board    *Board
 	renderer *WindowBoardRenderer
@@ -12,9 +18,9 @@ type Game struct {
 func NewGame() *Game {
 	g := &Game{}
 	bc := BoardConfig{
-		RowsNum:       10,
-		ColsNum:       10,
-		BlackHolesNum: 10,
+		RowsNum:       rowsNum,
+		ColsNum:       colsNum,
+		BlackHolesNum: blackHolesNum,
 	}
 	g.board = NewBoard(bc)
 	g.renderer = NewWindowBoardRenderer()
@@ -22,11 +28,18 @@ func NewGame() *Game {
 }
 
 func (g *Game) Update() error {
+	if g.board.IsComplete() {
+		return nil
+	}
+
 	if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 		x, y := ebiten.CursorPosition()
 		i := x / (tileSize + tileMargin)
 		j := y / (tileSize + tileMargin)
-		g.board.Click(i, j)
+		if !g.board.Click(i, j) {
+			g.board.Open()
+			g.board.isGameOver = true
+		}
 	}
 
 	return nil
@@ -37,5 +50,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return 320, 240
+	w := tileSize*rowsNum + tileMargin*rowsNum + tileMargin
+	h := tileSize*colsNum + tileMargin*colsNum + tileMargin
+	return w, h
 }
